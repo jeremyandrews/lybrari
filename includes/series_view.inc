@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_series_view(){
+function lybrari_define_series_view(){
   $view = new view();
-  $view->name = 'calibre_series';
+  $view->name = 'lybrari_series';
   $view->description = 'Series list';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'series';
   $view->human_name = 'Series';
   $view->core = 7;
@@ -99,7 +99,7 @@ function calibre_define_series_view(){
   $handler->display->display_options['menu']['title'] = 'Series';
   $handler->display->display_options['menu']['description'] = 'List of series';
   $handler->display->display_options['menu']['weight'] = '5';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 

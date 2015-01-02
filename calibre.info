@@ -1,8 +1,0 @@
-name = "Calibre"
-description = "Display Calibre-managed books in Drupal website."
-dependencies[] = views
-package = "Calibre"
-core = 7.x
-
-files[] = calibre.module
-files[] = calibre.views.inc

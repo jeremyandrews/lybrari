@@ -1,0 +1,14 @@
+<?php
+
+function lybrari_install() {
+  menu_save(
+    array(
+      'title' => t('Lybrari'),
+      'menu_name' => 'lybrari',
+      'description' => 'Lybrari'));
+}
+
+function lybrari_uninstall() {
+  menu_delete_links('lybrari');
+  menu_delete(array('menu_name' => 'lybrari') );
+}

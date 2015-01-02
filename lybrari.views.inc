@@ -4,7 +4,7 @@
 * Implementation of hook_views_data  
 */
 
-function  calibre_views_data(){
+function  lybrari_views_data(){
   error_log("Loading views");
  
   /*

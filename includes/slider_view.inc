@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_slider_view(){
+function lybrari_define_slider_view(){
   $view = new view();
-  $view->name = 'calibre_books_slider';
+  $view->name = 'lybrari_books_slider';
   $view->description = 'Slider ramdom books';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'books';
   $view->human_name = 'Books slider';
   $view->core = 7;
@@ -129,7 +129,7 @@ function calibre_define_slider_view(){
   $handler->display->display_options['path'] = 'library-home';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Library Home';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['weight'] = 0;
   
   $translatables['books_slider'] = array(

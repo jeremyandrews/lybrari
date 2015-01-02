@@ -46,5 +46,5 @@ h2 { margin-top: 40px; }
 </div>
 <h2><?php print t('Lasts books') ?></h2>
 <div class="slideshow-body">
-  <?php print(views_embed_view('calibre_lasts_books', $display_id = 'default')) ;?> 
+  <?php print(views_embed_view('lybrari_lasts_books', $display_id = 'default')) ;?> 
 </div>

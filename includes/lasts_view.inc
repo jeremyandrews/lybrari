@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_lasts_view(){
+function lybrari_define_lasts_view(){
   $view = new view();
-  $view->name = 'calibre_lasts_books';
+  $view->name = 'lybrari_lasts_books';
   $view->description = 'Last books grid';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'books';
   $view->human_name = 'Lasts books';
   $view->core = 7;

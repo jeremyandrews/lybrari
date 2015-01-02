@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_tags_view(){
+function lybrari_define_tags_view(){
   $view = new view();
-  $view->name = 'calibre_tags';
+  $view->name = 'lybrari_tags';
   $view->description = 'Tags list';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'tags';
   $view->human_name = 'Tags';
   $view->core = 7;
@@ -125,7 +125,7 @@ function calibre_define_tags_view(){
   $handler->display->display_options['menu']['title'] = 'Tags';
   $handler->display->display_options['menu']['description'] = 'Tags list';
   $handler->display->display_options['menu']['weight'] = '3';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 

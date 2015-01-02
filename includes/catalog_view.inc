@@ -1,12 +1,12 @@
 <?php
 
-function calibre_define_catalog_view(){
+function lybrari_define_catalog_view(){
   $view = new view();
-  $view->name = 'calibre_catalog';
+  $view->name = 'lybrari_catalog';
   $view->description = 'Books catalog with search form';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'books';
-  $view->human_name = 'calibre_catalog';
+  $view->human_name = 'lybrari_catalog';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -244,15 +244,15 @@ function calibre_define_catalog_view(){
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'calibre-catalog';
+  $handler->display->display_options['path'] = 'lybrari-catalog';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Catalog';
   $handler->display->display_options['menu']['description'] = 'Books catalog with search form';
   $handler->display->display_options['menu']['weight'] = '6';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $translatables['calibre_catalog'] = array(
+  $translatables['lybrari_catalog'] = array(
     t('Master'),
     t('Catalog'),
     t('more'),

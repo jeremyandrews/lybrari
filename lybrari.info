@@ -1,0 +1,8 @@
+name = "Lybrari"
+description = "Manage a library of books imported from Calibre."
+dependencies[] = views
+package = "Calibre"
+core = 7.x
+
+files[] = lybrari.module
+files[] = lybrari.views.inc

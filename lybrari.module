@@ -6,48 +6,47 @@
  * https://api.drupal.org/api/views/views.api.php/function/hook_views_data/7
  */ 
 
-function calibre_views_api() {
+function lybrari_views_api() {
   return array(
     'api' => 3,
-    'template path' => drupal_get_path('module', 'calibre') . '/themes',
+    'template path' => drupal_get_path('module', 'lybrari') . '/themes',
   );
 }
 
-function calibre_menu(){
-  
+function lybrari_menu(){
   $items['books-view/%'] = array(
-    'type'              => MENU_LOCAL_ACTION, 
-    'title'             => 'Books',
-    'description'       => 'List books',
-    'access callback'   =>  'user_access',
-    'access arguments'  => array('view_calibre_content'),
-    'page callback'     => 'calibre_book_view',
-    'page arguments'    => array(1),
+    'type' => MENU_LOCAL_ACTION, 
+    'title' => 'Books',
+    'description' => 'List books',
+    'access callback' => 'user_access',
+    'access arguments' => array('view_lybrari_content'),
+    'page callback' => 'lybrari_book_view',
+    'page arguments' => array(1),
   );  
 
   return $items;
 }
 
 
-function calibre_permission() {
+function lybrari_permission() {
   return array(
-    'config_calibre' => array(
-      'title' => t('Config Calibre Server'),
-      'description' => 'Config Calibre Server.',
+    'config_lybrari' => array(
+      'title' => t('Configure lybrari'),
+      'description' => 'Configure lybrari.',
     ),
-    'view_calibre_content'  => array(
-      'title' => t('View Calibre Server content'),
-      'description' => 'View Calibre Server content.',
+    'view_lybrari_content'  => array(
+      'title' => t('View lybrari content'),
+      'description' => 'View lybrari content.',
     ),
   );
 }
 
 
-function calibre_book_view($id){
+function lybrari_book_view($id){
   db_set_active('calibre');
   $query = db_select('books', 'b')
     ->fields('b')
-    ->condition('b.id',$id);
+    ->condition('b.id', intval(str_replace(',', '', $id)));
   //Join and fields authors table
   $query->LeftJoin('books_authors_link','ba','b.id = ba.book');
   $query->LeftJoin('authors','a','ba.author = a.id');
@@ -77,28 +76,27 @@ function calibre_book_view($id){
   $query->LeftJoin('languages','l','bl.lang_code = l.id');
   $query->addField('l','id','id_language');
   $query->addField('l','lang_code','name_language');
-  
-  
+ 
   $result = $query->execute();
   db_set_active();
   while($record = $result->fetchAssoc()) {
-        $book = $record;
+    $book = $record;
   }
   drupal_set_title($book['title']);
   $cover ='';
   if ( $book['has_cover'] == 1 ){
-    $calibre_path = '/sites/default/files/calibre/';
-    $cover = $calibre_path.$book['path'].'/cover.jpg';
+    $lybrari_path = '/sites/default/files/calibre/';
+    $cover = $lybrari_path.$book['path'].'/cover.jpg';
     $cover = '<img style="width:100%;height:auto;" src="'.$cover.'">';  
   }
   
   $label_author = t('Author');
   $label_publisher = t('Publisher');
   $label_tag = t('Tag');
-  $label_serie = t('Serie');
+  $label_serie = t('Series');
   $label_language = t('Language');
   $label_published = t('Published');
-  $label_serie_index = t('Serie index');
+  $label_serie_index = t('Series index');
   $label_isbn = t('ISBN');
   $label_lccn = t('LCCN');
   $label_download = t('Download link');
@@ -108,10 +106,9 @@ function calibre_book_view($id){
   $book_serie = l($book['name_serie'],'books-serie-list/'.$book['id_serie'].'/'.$book['name_serie']);
   $book_tag = l($book['name_tag'],'books-tag-list/'.$book['id_tag'].'/'.$book['name_tag']);
   $book_publisher = l($book['name_publisher'],'books-publisher-list/'.$book['id_publisher'].'/'.$book['name_publisher']);
-  
-  
-  drupal_add_css(drupal_get_path('module', 'calibre') . '/css/book_view.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));  
-  
+
+  drupal_add_css(drupal_get_path('module', 'lybrari') . '/css/book_view.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));  
+ 
   $dir = 'sites/default/files/calibre/'.$book['path'];
   $files = scandir($dir);
   $books = array();
@@ -122,10 +119,7 @@ function calibre_book_view($id){
     }
   }
   $books = implode(' | ',$books);
-  
-  
-  
-  
+
   $out = "
     <div class='clearfix'>
       <div class='books-cover-box'>
@@ -181,44 +175,5 @@ function calibre_book_view($id){
     </div>
   ";
   
-  
   return $out;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

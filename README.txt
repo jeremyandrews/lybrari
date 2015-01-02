@@ -1,41 +1,22 @@
+--------
+Overview
+--------
+This Lybrari module imports your book collection from Calibre, exposing them
+to Drupal as a custom entity type.
 
--- SUMMARY --
+------------
+Installation
+------------
+ 1) Extract the lybrari module into sites/all/modules/contrib or your preferred
+    modules directory, then enable at admin/modules.
 
-This module allows you to expose Calibre library on a site made ​​with Drupal.
+-------
+History
+-------
+This project was originally forked from the 7.x-1.0 version of the
+calibre_server module found on Drupal.org.
 
-Calibre is a free and open source application for managing a library of e-books. 
-Provides a simple and efficient web server for searching and downloading e-books. 
-Its integration with any web site can be made ​​using iframes.
-
-Integration by the Calibre Server module is another approach, based on direct 
-access to the data stored by Calibre to generate views that allow you to navigate 
-through the collection of e-books.
-
-The advantage of this approach is a better integration with the look of the web site
-and resource consumption is lower because the Calibre server is not used.
-
--- 	SUMARIO --
-Este módulo permite exponer una biblioteca de Calibre en un sitio hecho con Drupal.
-
-Calibre es una aplicación libre y open source que permite gestionar una biblioteca 
-de e-books. Proporciona un sencillo y eficiente servidor web para la búsqueda y 
-descarga de e-books. Su integración con cualquier sitio web puede ser realizada 
-mediante la utilización de iframes.
-
-La integración realizada por el módulo Calibre Server sigue otra aproximación, 
-se base en acceder directamente a los datos almacenados por Calibre para generar 
-las vistas que permiten navegar a través de la colección de e-books.
-
-La ventaja de esta aproximación es una mejor integración con el aspecto del sitio
-web y un menor consumo de recursos, al no necesitar el servidor proporcionado por
-Calibre.
-
-
--- INSTALLATION --
-
-Calibre Server is installed by standard way: unzip in carpteta chosen (usually 
-/sites/all/modules) and is activated in the module administration page (/admin/modules).
-
+ ****
 You must create a shortcut called calibre_server to the Calibre library in 
 /sites/default/files directory.
 
@@ -47,6 +28,11 @@ Permissions of all directories and files of the library must be modified to be
 accessible by the web server:
 chown www-data /home/carlos/calibre -R
 chmod 775 /home/carlos/calibre-R
+ ****
+
+
+-- INSTALLATION --
+
 
 The Calibre Server module will have created a menu that is available in blocks 
 administration page (/admin/structure/block), which provides links to views 

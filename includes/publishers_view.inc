@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_publishers_view(){
+function lybrari_define_publishers_view(){
   $view = new view();
-  $view->name = 'calibre_publishers';
+  $view->name = 'lybrari_publishers';
   $view->description = 'Publishers list';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'publishers';
   $view->human_name = 'Publishers';
   $view->core = 7;
@@ -128,7 +128,7 @@ function calibre_define_publishers_view(){
   $handler->display->display_options['menu']['title'] = 'Publishers';
   $handler->display->display_options['menu']['description'] = 'List all publishers';
   $handler->display->display_options['menu']['weight'] = '4';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 

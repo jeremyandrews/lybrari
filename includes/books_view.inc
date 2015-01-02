@@ -1,10 +1,10 @@
 <?php
 
-function calibre_define_books_view(){
+function lybrari_define_books_view(){
   $view = new view();
-  $view->name = 'calibre_libros';
+  $view->name = 'lybrari_libros';
   $view->description = 'Books list';
-  $view->tag = 'calibre server';
+  $view->tag = 'lybrari server';
   $view->base_table = 'books';
   $view->human_name = 'books';
   $view->core = 7;
@@ -142,12 +142,12 @@ function calibre_define_books_view(){
   $handler->display->display_options['arguments']['title']['limit'] = '1';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  $handler->display->display_options['path'] = 'calibre-books';
+  $handler->display->display_options['path'] = 'lybrari-books';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Books';
-  $handler->display->display_options['menu']['description'] = 'Calibre books';
+  $handler->display->display_options['menu']['description'] = 'Lybrari books';
   $handler->display->display_options['menu']['weight'] = '1';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
@@ -369,7 +369,7 @@ function calibre_define_books_view(){
   $handler->display->display_options['menu']['title'] = 'Tags';
   $handler->display->display_options['menu']['description'] = 'List of tags';
   $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'calibre-library';
+  $handler->display->display_options['menu']['name'] = 'lybrari-library';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
