@@ -42,7 +42,7 @@ function lybrari_permission() {
 }
 
 
-function lybrari_book_view($id){
+function lybrari_book_view($id) {
   db_set_active('calibre');
   $query = db_select('books', 'b')
     ->fields('b')
@@ -84,9 +84,10 @@ function lybrari_book_view($id){
   }
   drupal_set_title($book['title']);
   $cover ='';
-  if ( $book['has_cover'] == 1 ){
-    $lybrari_path = '/sites/default/files/calibre/';
-    $cover = $lybrari_path.$book['path'].'/cover.jpg';
+  if ($book['has_cover'] == 1) {
+    # @todo /site/default/files/calibre
+    $lybrari_path = '/calibre/';
+    $cover = $lybrari_path.$book['path'] . '/cover.jpg';
     $cover = '<img style="width:100%;height:auto;" src="'.$cover.'">';  
   }
   
@@ -101,7 +102,7 @@ function lybrari_book_view($id){
   $label_lccn = t('LCCN');
   $label_download = t('Download link');
   $published = $book['pubdate'];
-  $published = substr(format_date( strtotime($published), 'short' ),0,10);
+  $published = substr(format_date(strtotime($published), 'short'), 0, 10);
   $book_author = l($book['name_author'],'books-author-list/'.$book['id_author'].'/'.$book['name_author']);
   $book_serie = l($book['name_serie'],'books-serie-list/'.$book['id_serie'].'/'.$book['name_serie']);
   $book_tag = l($book['name_tag'],'books-tag-list/'.$book['id_tag'].'/'.$book['name_tag']);
@@ -109,16 +110,17 @@ function lybrari_book_view($id){
 
   drupal_add_css(drupal_get_path('module', 'lybrari') . '/css/book_view.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));  
  
-  $dir = 'sites/default/files/calibre/'.$book['path'];
+  # @todo /site/default/files/calibre
+  $dir = '/var/www/calibre/' . $book['path'];
   $files = scandir($dir);
   $books = array();
-  foreach($files as $file){
-    $file_ext =  pathinfo( $dir.'/'.$file  ,PATHINFO_EXTENSION ) ;
-    if ( $file_ext == 'mobi' || $file_ext == 'epub' || $file_ext == 'fb2' || $file_ext == 'pdf'   ){
-        $books[] = l( $file_ext, $dir.'/'.$file  ) ;
+  foreach ($files as $file) {
+    $file_ext =  pathinfo($dir . '/' . $file, PATHINFO_EXTENSION);
+    if (in_array($file_ext, array('epub', 'mobi', 'azw3', 'cbr', 'pdf'))) {
+      $books[] = l($file_ext, $dir . '/' . $file);
     }
   }
-  $books = implode(' | ',$books);
+  $books = implode(' | ' , $books);
 
   $out = "
     <div class='clearfix'>

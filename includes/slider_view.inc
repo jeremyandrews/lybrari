@@ -71,7 +71,8 @@ function lybrari_define_slider_view(){
   $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['fields']['path']['label'] = '';
   $handler->display->display_options['fields']['path']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['path']['alter']['text'] = '<img src="/sites/default/files/calibre/[path]/cover.jpg" />';
+  // @todo: $handler->display->display_options['fields']['path']['alter']['text'] = '<img src="/sites/default/files/calibre/[path]/cover.jpg" />';
+  $handler->display->display_options['fields']['path']['alter']['text'] = '<img src="/calibre/[path]/cover.jpg" />';
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
   /* Campo: Contenido: Autor */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -149,7 +150,8 @@ function lybrari_define_slider_view(){
     t('Book Id'),
     t('Title'),
     t('[title] '),
-    t('<img src="/sites/default/files/calibre/[path]/cover.jpg" />'),
+    // @todo: t('<img src="/sites/default/files/calibre/[path]/cover.jpg" />'),
+    t('<img src="/calibre/[path]/cover.jpg" />'),
     t('Autor'),
     t('[name]'),
     t('Tags'),
