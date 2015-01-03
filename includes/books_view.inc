@@ -2,7 +2,7 @@
 
 function lybrari_define_books_view(){
   $view = new view();
-  $view->name = 'lybrari_libros';
+  $view->name = 'lybrari_books';
   $view->description = 'Books list';
   $view->tag = 'lybrari server';
   $view->base_table = 'books';
@@ -13,7 +13,7 @@ function lybrari_define_books_view(){
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'libros';
+  $handler->display->display_options['title'] = 'Books';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['access']['type'] = 'none';

@@ -1,8 +1,6 @@
-.books-cover-box{float:left; width: 20%}
+.books-cover-box {float:left; width: 20%; padding-top: 10px;}
 
-.books-data-box{float:left; padding-left: 20px;}
+.books-data-box {float:left; width: 78%; padding-left: 2%;}
 
 .books-data-box .label {font-variant:small-caps;font-size: 110%;}
 .books-data-box .data {font-size: 120%;}
-
-
