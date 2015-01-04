@@ -73,7 +73,7 @@ function lybrari_define_series_view(){
   $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '[name]';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'books-serie-list/[id]/[name]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'books-series-list/[id]/[name]';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
 
   /* Display: Page */

@@ -259,8 +259,8 @@ function lybrari_define_books_view(){
   $handler->display->display_options['defaults']['filters'] = FALSE;
   $handler->display->display_options['path'] = 'books-publisher-list';
 
-  /* Display: Lista por serie */
-  $handler = $view->new_display('page', 'Lista por serie', 'page_3');
+  /* Display series list */
+  $handler = $view->new_display('page', 'Series list', 'page_3');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -304,14 +304,14 @@ function lybrari_define_books_view(){
   $handler->display->display_options['arguments']['null']['field'] = 'null';
   $handler->display->display_options['arguments']['null']['exception']['title'] = 'All(s)';
   $handler->display->display_options['arguments']['null']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['null']['title'] = 'Books - Serie: %2';
+  $handler->display->display_options['arguments']['null']['title'] = 'Series: %2';
   $handler->display->display_options['arguments']['null']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['null']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['null']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['null']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  $handler->display->display_options['path'] = 'books-serie-list';
+  $handler->display->display_options['path'] = 'books-series-list';
 
   /* Display: Lista por etiqueta */
   $handler = $view->new_display('page', 'Lista por etiqueta', 'page_4');
@@ -432,8 +432,8 @@ function lybrari_define_books_view(){
     t('Books - Author: %2'),
     t('List by publisher'),
     t('Books - Publisher: %2'),
-    t('List by serie'),
-    t('Books - Serie: %2'),
+    t('List by series'),
+    t('Books - Series: %2'),
     t('List by tag'),
     t('Books - Tag: %2'),
     t('Attachment'),

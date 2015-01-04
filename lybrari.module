@@ -48,7 +48,7 @@ function lybrari_book_view($id) {
 
   db_set_active('calibre');
   $query = db_select('books', 'b')
-    ->fields('b', array('id', 'title', 'series_index', 'isbn', 'lccn', 'path', 'has_cover', 'pubdate', 'timestamp', 'last_modified'))
+    ->fields('b', array('id', 'title', 'isbn', 'lccn', 'path', 'has_cover', 'pubdate', 'timestamp', 'last_modified'))
     ->condition('b.id', $id);
   
   //  get publisher information
@@ -60,15 +60,13 @@ function lybrari_book_view($id) {
   // get series information
   $query->LeftJoin('books_series_link', 'bs', 'b.id = bs.book');
   $query->LeftJoin('series', 's', 'bs.series = s.id');
-  $query->addField('s', 'id', 'id_serie');
-  $query->addField('s', 'name', 'name_serie');
+  $query->addField('s', 'id', 's_id');
+  $query->addField('s', 'name', 's_name');
 
-  // get language information
-  $query->LeftJoin('books_languages_link', 'bl', 'b.id = bl.book');
-  $query->LeftJoin('languages', 'l', 'bl.lang_code = l.id');
-  $query->addField('l', 'id', 'id_language');
-  $query->addField('l', 'lang_code', 'name_language');
- 
+  // get book description
+  $query->LeftJoin('comments', 'c', 'b.id = c.book');
+  $query->addField('c', 'text', 'c_text');
+
   $result = $query->execute();
   db_set_active();
   foreach ($result as $record) {
@@ -81,6 +79,7 @@ function lybrari_book_view($id) {
     $lybrari_path = '/calibre/';
     $cover = '<img style="width:100%;height:auto;" src="' . "{$lybrari_path}{$book->path}/cover.jpg" . '">';
   }
+  $description = $book->c_text;
 
   // Get list of all book authors.
   db_set_active('calibre');
@@ -116,19 +115,19 @@ function lybrari_book_view($id) {
   $label_author = t('Author');
   $label_publisher = t('Publisher');
   $label_tag = t('Tag');
-  $label_serie = t('Series');
-  $label_language = t('Language');
+  $label_series = t('Series');
+  //$label_language = t('Language');
   $label_published = t('Published');
-  $label_serie_index = t('Series index');
+  //$label_serie_index = t('Series index');
   $label_isbn = t('ISBN');
   $label_lccn = t('LCCN');
   $label_download = t('Download link');
   $published = $book->pubdate;
   $published = substr(format_date(strtotime($published), 'short'), 0, 10);
   $book_author = implode(' | ', $authors);
-  $book_serie = l($book->name_serie,'books-serie-list/'.$book->id_serie.'/'.$book->name_serie);
+  $book_series = l($book->s_name, "books-series-list/$book->s_id/$book->s_name");
   $book_tag = implode(' | ', $tags);
-  $book_publisher = l($book->name_publisher,'books-publisher-list/'.$book->id_publisher.'/'.$book->name_publisher);
+  $book_publisher = l($book->name_publisher, "books-publisher-list/$book->id_publisher/$book->name_publisher");
 
   drupal_add_css(drupal_get_path('module', 'lybrari') . '/css/book_view.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));  
  
@@ -166,20 +165,12 @@ function lybrari_book_view($id) {
             <td class='data'>$book_tag</td>
           </tr>
           <tr>
-            <td class='label'>$label_language</td>
-            <td class='data'>{$book->name_language}</td>
-          </tr>
-          <tr>
             <td class='label'>$label_published</td>
             <td class='data'>$published</td>
           </tr>
           <tr>
-            <td class='label'>$label_serie</td>
-            <td class='data'>$book_serie</td>
-          </tr>
-          <tr>
-            <td class='label'>$label_serie_index</td>
-            <td class='data'>{$book->series_index}</td>
+            <td class='label'>$label_series</td>
+            <td class='data'>$book_series</td>
           </tr>
           <tr>
             <td class='label'>$label_isbn</td>
@@ -196,6 +187,9 @@ function lybrari_book_view($id) {
           
         </table>
 
+      </div>
+      <div class='books-description-box'>
+        $description
       </div>
     </div>
   ";
