@@ -433,7 +433,7 @@ function lybrari_define_books_view(){
     t('List by publisher'),
     t('Books - Publisher: %2'),
     t('List by series'),
-    t('Books - Series: %2'),
+    t('Series: %2'),
     t('List by tag'),
     t('Books - Tag: %2'),
     t('Attachment'),

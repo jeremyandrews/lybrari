@@ -1,8 +1,9 @@
 name = "Lybrari"
 description = "Manage a library of books imported from Calibre."
-dependencies[] = views
+dependencies[] = views_aggregator
 package = "Calibre"
 core = 7.x
 
 files[] = lybrari.module
 files[] = lybrari.views.inc
+files[] = includes/lybrari_views_fields.inc

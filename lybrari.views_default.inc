@@ -9,8 +9,8 @@ function lybrari_views_default_views(){
   require_once($path.'books_view.inc');
   $views['lybrari_books'] = lybrari_define_books_view();
  
-  require_once($path.'catalog_view.inc');
-  $views['lybrari_catalog'] = lybrari_define_catalog_view();
+  require_once($path.'lybrari_view.inc');
+  $views['lybrari'] = lybrari_define_lybrari_view();
  
   require_once($path.'lasts_view.inc');
   $views['lybrari_lasts'] = lybrari_define_lasts_view();

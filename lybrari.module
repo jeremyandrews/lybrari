@@ -54,8 +54,8 @@ function lybrari_book_view($id) {
   //  get publisher information
   $query->LeftJoin('books_publishers_link', 'bp', 'b.id = bp.book');
   $query->LeftJoin('publishers', 'p', 'bp.publisher = p.id');
-  $query->addField('p', 'id', 'id_publisher');
-  $query->addField('p', 'name', 'name_publisher');
+  $query->addField('p', 'id', 'p_id');
+  $query->addField('p', 'name', 'p_name');
 
   // get series information
   $query->LeftJoin('books_series_link', 'bs', 'b.id = bs.book');
@@ -94,7 +94,7 @@ function lybrari_book_view($id) {
   db_set_active();
   $authors = array();
   foreach ($result as $author) {
-    $authors[] = l($author->a_name, "books-author-list/$author->a_id");
+    $authors[] = l($author->a_name, "books-by-author/$author->a_id");
   }
 
   // Get a list of all book tags.
@@ -109,7 +109,7 @@ function lybrari_book_view($id) {
   db_set_active();
   $tags = array();
   foreach ($result as $tag) {
-    $tags[] = l($tag->t_name, "books-tag-list/$tag->t_id");
+    $tags[] = l($tag->t_name, "books-by-tag/$tag->t_id");
   }
   
   $label_author = t('Author');
@@ -118,16 +118,15 @@ function lybrari_book_view($id) {
   $label_series = t('Series');
   //$label_language = t('Language');
   $label_published = t('Published');
-  //$label_serie_index = t('Series index');
   $label_isbn = t('ISBN');
   $label_lccn = t('LCCN');
   $label_download = t('Download link');
   $published = $book->pubdate;
   $published = substr(format_date(strtotime($published), 'short'), 0, 10);
   $book_author = implode(' | ', $authors);
-  $book_series = l($book->s_name, "books-series-list/$book->s_id/$book->s_name");
+  $book_series = l($book->s_name, "books-by-series/$book->s_id/$book->s_name");
   $book_tag = implode(' | ', $tags);
-  $book_publisher = l($book->name_publisher, "books-publisher-list/$book->id_publisher/$book->name_publisher");
+  $book_publisher = l($book->p_name, "books-by-publisher/$book->p_id");
 
   drupal_add_css(drupal_get_path('module', 'lybrari') . '/css/book_view.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));  
  

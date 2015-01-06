@@ -4,12 +4,12 @@
 * Implementation of hook_views_data  
 */
 
-function  lybrari_views_data(){
+function  lybrari_views_data() {
   error_log("Loading views");
  
-  /*
+  /**
    * TABLES
-   */
+   **/
    
   /*  BASE TABLES  */
   
@@ -148,7 +148,6 @@ function  lybrari_views_data(){
    * FIELDS
    */
   
-  
   /* Books */ 
   $data['books']['title'] = array(
     'title' => t('Title'), // The item it appears as on the UI,
@@ -195,7 +194,53 @@ function  lybrari_views_data(){
       'handler' => 'views_handler_argument_numeric',
     ), 
   );
-  
+
+  $data['books']['series_index'] = array(
+    'title' => t('Series index'), // The item it appears as on the UI,
+    'help' => t('Position in series.'), // The help that appears on the UI,
+     // Information for displaying a title as a field
+    'field' => array(
+      'field' => 'series_index', // the real field. This could be left out since it is the same.
+      'group' => t('Content'), // The group it appears in on the UI. Could be left out.
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+      'link_to_node default' => TRUE,
+     ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    // Information for accepting a title as a filter
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_numeric',
+    ),
+  );
+
+  $data['books']['pubdate'] = array(
+    'title' => t('Publication date'), // The item it appears as on the UI,
+    'help' => t('When this edition of the book was published.'), // The help that appears on the UI,
+     // Information for displaying a title as a field
+    'field' => array(
+      'field' => 'pubdate', // the real field. This could be left out since it is the same.
+      'group' => t('Content'), // The group it appears in on the UI. Could be left out.
+      'handler' => 'lybrari_handler_field_datetime',
+      'click sortable' => TRUE,
+      'link_to_node default' => TRUE,
+     ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    // Information for accepting a title as a filter
+    'filter' => array(
+      'handler' => 'views_handler_filter_date',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_date',
+    ),
+  );
+
   $data['books']['path'] = array(
     'title' => t('Path'), // The item it appears as on the UI,
     'help' => t('The files path.'), // The help that appears on the UI,
@@ -220,13 +265,13 @@ function  lybrari_views_data(){
   );
   
   $data['books']['timestamp'] = array(
-    'title' => t('Date creation'), // The item it appears as on the UI,
-    'help' => t('The date creation of record.'), // The help that appears on the UI,
+    'title' => t('Timestamp'), // The item it appears as on the UI,
+    'help' => t('When this book record was created.'), // The help that appears on the UI,
      // Information for displaying a title as a field
     'field' => array(
       'field' => 'timestamp', // the real field. This could be left out since it is the same.
       'group' => t('Content'), // The group it appears in on the UI. Could be left out.
-      'handler' => 'views_handler_field_date',
+      'handler' => 'lybrari_handler_field_datetime',
      ),
     'sort' => array(
       'handler' => 'views_handler_sort',
@@ -247,7 +292,7 @@ function  lybrari_views_data(){
     'field' => array(
       'field' => 'has_cover', // the real field. This could be left out since it is the same.
       'group' => t('Content'), // The group it appears in on the UI. Could be left out.
-      'handler' => 'views_handler_field_boolena',
+      'handler' => 'views_handler_field_boolean',
       'click sortable' => FALSE,
       'link_to_node default' => FALSE,
      ),
@@ -362,7 +407,7 @@ function  lybrari_views_data(){
   /* series */
   $data['series']['name'] = array(
     'title' => t('Series'), // The item it appears as on the UI,
-    'help' => t('The serie name.'), // The help that appears on the UI,
+    'help' => t('The series name.'), // The help that appears on the UI,
      // Information for displaying a title as a field
     'field' => array(
       'field' => 'name', // the real field. This could be left out since it is the same.
@@ -385,8 +430,8 @@ function  lybrari_views_data(){
   
 
   $data['series']['id'] = array(
-    'title' => t('Serie Id'), // The item it appears as on the UI,
-    'help' => t('The serie Id.'), // The help that appears on the UI,
+    'title' => t('Series Id'), // The item it appears as on the UI,
+    'help' => t('The series Id.'), // The help that appears on the UI,
      // Information for displaying a title as a field
     'field' => array(
       'field' => 'id', // the real field. This could be left out since it is the same.

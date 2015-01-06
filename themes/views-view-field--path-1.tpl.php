@@ -23,7 +23,7 @@
  */
 ?>
 <?php 
-  $dir = 'sites/default/files/calibre/'.$field->original_value;
+  $dir = '/var/www/calibre/' . $field->original_value;
   $files = scandir($dir);
   $books = array();
   foreach($files as $file){
