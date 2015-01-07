@@ -3,14 +3,14 @@
 function lybrari_define_lybrari_view() {
   $view = new view();
   $view->name = 'lybrari';
-  $view->description = '';
+  $view->description = 'Searchable library of all books.';
   $view->tag = 'default';
   $view->base_table = 'books';
   $view->human_name = 'Lybrari';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
+  
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Lybrari';
@@ -31,8 +31,12 @@ function lybrari_define_lybrari_view() {
   $handler->display->display_options['style_options']['columns'] = array(
     'timestamp' => 'timestamp',
     'id' => 'id',
+    'path' => 'path',
+    'has_cover' => 'has_cover',
     'title' => 'title',
+    'id_1' => 'id_1',
     'name' => 'name',
+    'id_2' => 'id_2',
     'name_1' => 'name_1',
   );
   $handler->display->display_options['style_options']['default'] = 'timestamp';
@@ -67,15 +71,60 @@ function lybrari_define_lybrari_view() {
       'aggr_column' => 'views_aggregator_sum',
       'aggr_par_column' => '',
     ),
+    'path' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+    'has_cover' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
-      'separator' => '',
+      'separator' => '<br />',
       'empty_column' => 0,
       'has_aggr' => 1,
       'aggr' => array(
         'views_aggregator_group_and_compress' => 'views_aggregator_group_and_compress',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+    'id_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
       ),
       'aggr_par' => '',
       'has_aggr_column' => 0,
@@ -95,6 +144,21 @@ function lybrari_define_lybrari_view() {
       'aggr_par' => ', ',
       'has_aggr_column' => 0,
       'aggr_column' => 'views_aggregator_enumerate',
+      'aggr_par_column' => '',
+    ),
+    'id_2' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
       'aggr_par_column' => '',
     ),
     'name_1' => array(
@@ -119,11 +183,13 @@ function lybrari_define_lybrari_view() {
     2 => '2',
   );
   $handler->display->display_options['style_options']['column_aggregation']['precision'] = '2';
-  /* Field: Content: Date creation */
+  /* Field: Content: Timestamp */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['table'] = 'books';
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['label'] = 'Added';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'time ago';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
   /* Field: Content: Book Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
   $handler->display->display_options['fields']['id']['table'] = 'books';
@@ -132,6 +198,26 @@ function lybrari_define_lybrari_view() {
   $handler->display->display_options['fields']['id']['exclude'] = TRUE;
   $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'books';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['alter']['text'] = '<img src="/calibre/[path]/cover.jpg" height="150" />';
+  $handler->display->display_options['fields']['path']['alter']['path'] = 'books-view/[id]';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  /* Field: Content: Has Cover */
+  $handler->display->display_options['fields']['has_cover']['id'] = 'has_cover';
+  $handler->display->display_options['fields']['has_cover']['table'] = 'books';
+  $handler->display->display_options['fields']['has_cover']['field'] = 'has_cover';
+  $handler->display->display_options['fields']['has_cover']['label'] = 'Cover';
+  $handler->display->display_options['fields']['has_cover']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['has_cover']['alter']['text'] = '<img src="/calibre/[path]/cover.jpg" height="150" />';
+  $handler->display->display_options['fields']['has_cover']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['has_cover']['alter']['path'] = 'books-view/[id]';
+  $handler->display->display_options['fields']['has_cover']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['has_cover']['not'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'books';
@@ -155,7 +241,7 @@ function lybrari_define_lybrari_view() {
   $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '[name]';
   $handler->display->display_options['fields']['name']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name']['alter']['path'] = 'books-author-list/[id_1]/[name]';
+  $handler->display->display_options['fields']['name']['alter']['path'] = 'books-by-author/[id_1]';
   /* Field: Content: Series Id */
   $handler->display->display_options['fields']['id_2']['id'] = 'id_2';
   $handler->display->display_options['fields']['id_2']['table'] = 'series';
@@ -171,7 +257,7 @@ function lybrari_define_lybrari_view() {
   $handler->display->display_options['fields']['name_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name_1']['alter']['text'] = '[name_1]';
   $handler->display->display_options['fields']['name_1']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['name_1']['alter']['path'] = 'books-series-list/[id_2]/[name_1]';
+  $handler->display->display_options['fields']['name_1']['alter']['path'] = 'books-by-series/[id_2]';
   $handler->display->display_options['fields']['name_1']['hide_empty'] = TRUE;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
@@ -227,10 +313,11 @@ function lybrari_define_lybrari_view() {
     1 => 0,
     3 => 0,
   );
-
+  
   /* Display: Lybrari */
   $handler = $view->new_display('page', 'Lybrari', 'page_1');
   $handler->display->display_options['display_description'] = 'Searchable library of all books.';
   $handler->display->display_options['path'] = 'lybrari';
+
   return $view;
 }
